@@ -16,13 +16,13 @@ param
 
 function ExecuteSDNValidationTests
 {
-    $BinaryPath = Split-Path -Path:$PSCommandPath -Parent
+    c:\SDN Validation Tool = Split-Path -Path:$PSCommandPath -Parent
 
     $ncServersUri = "https://$NetworkControllerName/networking/v1/servers"
 
     $logDate = "$(Get-Date -Format "yyyy.MM.dd_hh.mm.ss")"
-    $XmlReportPath = "$BinaryPath\XMLReportFileName$logDate.xml"
-    $FullHtmlReportPath = "$BinaryPath\SDN_Validation_Report_$logDate.htm"
+    $XmlReportPath = "c:\SDN Validation Tool\XMLReportFileName$logDate.xml"
+    $FullHtmlReportPath = "c:\SDN Validation Tool\SDN_Validation_Report_$logDate.htm"
     $health = 'Healthy'
     $Report = 'Validation Test Report'
 
@@ -76,12 +76,12 @@ function ExecuteSDNValidationTests
 '@
 
     $type = Add-Type -TypeDefinition $source -PassThru 
-    $redirectClass = [Redirector]::new($BinaryPath)
+    $redirectClass = [Redirector]::new("c:\SDN Validation Tool")
     
     [System.AppDomain]::CurrentDomain.add_AssemblyResolve($redirectClass.EventHandler)
     
-    [System.Reflection.Assembly]::LoadFrom("$BinaryPath\Microsoft.NetworkController.Validation.dll")
-    [System.Reflection.Assembly]::LoadFrom("$BinaryPath\Microsoft.NetworkController.Validation.Common.dll")
+    [System.Reflection.Assembly]::LoadFrom("c:\SDN Validation Tool\Microsoft.NetworkController.Validation.dll")
+    [System.Reflection.Assembly]::LoadFrom("c:\SDN Validation Tool\Microsoft.NetworkController.Validation.Common.dll")
 
     LogEvent "Saving current TrustedHosts"
     $savedTrustedHosts = GetTrustedHosts
