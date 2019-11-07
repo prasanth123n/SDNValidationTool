@@ -16,7 +16,7 @@ param
 
 function ExecuteSDNValidationTests
 {
-    c:\SDN Validation Tool = Split-Path -Path:$PSCommandPath -Parent
+    #c:\SDN Validation Tool = Split-Path -Path:$PSCommandPath -Parent
 
     $ncServersUri = "https://$NetworkControllerName/networking/v1/servers"
 
